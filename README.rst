@@ -1,14 +1,22 @@
-django-numerics==0.0.1 |build|_
+django-numerics |build|_
 ===============================
+
 Give your app a mobile dashboard.
 
 django-numerics is a numerics dashboard endpoint provider for django.
 
+This is still under development.
+
+TODO
+====
+Documentation, Usage examples
+
 Dependencies
 ============
-Python3
-Django
-cryptography
+
+- python 3.4
+- Django 1.7
+- cryptography
 
 Current version works only for python 3. python 2 will be provided soon.
 
