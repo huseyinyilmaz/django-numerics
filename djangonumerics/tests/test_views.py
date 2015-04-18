@@ -16,8 +16,11 @@ class EndpointViewTests(TestCase):
         self.client = Client()
 
     def test_no_registered_endpoint(self):
-        """Test when we have no registered enpoint,
-        system returns returns an empty endpoint_urls"""
+        """Test view context with no endpoint.
+
+        Test when we have no registered enpoint,
+        system returns returns an empty endpoint_urls.
+        """
         url = reverse('django-numerics-index')
         User = get_user_model()
         User.objects.create_user('test', 'test@test.com', 'test')
