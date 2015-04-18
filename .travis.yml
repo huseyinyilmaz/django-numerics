@@ -34,7 +34,7 @@ env:
 #  - echo 'create table nodestore (key text primary key, value blob, flags int);' | cqlsh -k sentry --cqlversion=3.0.3
 
 script:
-  - pip install -r django==$DJANGO_VERSION
+  - pip install Django==$DJANGO_VERSION
   - pip install -r dev_requirements.txt
   - flake8 djangonumerics
   - python setup.py test
