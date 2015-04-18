@@ -60,7 +60,8 @@ def register(name, func, args=None, kwargs=None, cache_timeout=0,
                         func=func,
                         args=args,
                         kwargs=kwargs,
-                        cache_timeout=cache_timeout)
+                        cache_timeout=cache_timeout,
+                        permission_func=permission_func)
     if(api_hash in _CODE_ENDPOINT_MAP):
         logger.warn('Endpoint %s is already registered to numerics', name)
     else:
