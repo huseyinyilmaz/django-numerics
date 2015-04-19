@@ -1,16 +1,38 @@
 {% extends "djangonumerics/base.html" %}
 {% block extra_head %}
+  <!-- Custom styles for this template -->
+  <link href="{{ STATIC_URL }}djangonumerics/styles/help.css" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
--{{ NumberResponse.code }}-
-  <br>
--{{ LabelResponse.code }}-
-  <br>
-  {% if endpoint.response_type.code == NumberResponse.code %}
-    HORRAY LABEL RESPONSE
-  {% endif %}
-  <br>
-  {{ endpoint }}
+  <div class="container">
+    <div class="row">
+      <div class="span12">
+        <section>
+          <div class="page-header">
+            <h1>How to add a new widget for {{ endpoint.name }} endpoint</h1>
+          </div>
+          <ol>
+            <li>Open numerics dashboard application on your mobile device</li>
+            <li> Create a new dasboard or open an existing dashboard.</li>
+            <li> Press plus sign on the upper right corner of your dashboard to create a new widget on that dashboard.</li>
+            <li>From the widget sources, choose "custom json" view as shown on image below:
+              <p><img src="{{STATIC_URL}}djangonumerics/images/choose_service.jpg" class="img-rounded help-image"></p></li>
 
+            {% if endpoint_response_class == label_response_class %}
+              <li>In "Basic Widgets" section, choose "Label from json data" widget as shown on image below.(remember url for endpoint "{{ endpoint.name }}" is "{{ request.scheme|safe }}://{{ request.get_host|safe }}{{ endpoint_url }}")
+              <p><img src="{{STATIC_URL}}djangonumerics/images/basic_label.jpg" class="img-rounded help-image"></p></li>
+            {% else %}
+            <li>In "Basic Widgets" section, choose "Number from json data" widget as shown on image below.(remember url for endpoint "{{ endpoint.name }}" is "{{ request.scheme|safe }}://{{ request.get_host|safe }}{{ endpoint_url }}
+              <p><img src="{{STATIC_URL}}djangonumerics/images/basic_number.jpg" class="img-rounded help-image"></p></li>
+            {% endif %}
+            <li>Set endpoint url as source of the widget by pasting it to source section as shown in the image below.")
+              <p><img src="{{STATIC_URL}}djangonumerics/images/json_view.jpg" class="img-rounded help-image"></p>
+            </li>
+            <li>At this point, widget should load the data from the endpoint.</li>
+          </ol>
+        </section>
+      </div>
+    </div>
+  </div>
 {% endblock %}

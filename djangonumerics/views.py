@@ -5,6 +5,7 @@ from django.http import Http404
 from django.http import HttpResponse
 from django.views.generic import View
 from django.conf import settings
+from djangonumerics.api import get_endpoint_url
 from djangonumerics.api import get_endpoints
 from djangonumerics.api import get_serializer
 from djangonumerics.forms import EndPointForm
@@ -105,9 +106,12 @@ class HelpView(BaseView):
         view_name = getattr(settings,
                             'DJANGO_NUMERICS_HELP_VIEW',
                             'djangonumerics/help.html')
+
         return render(self.request, view_name,
                       {'code': code,
                        'user': user,
                        'endpoint': endpoint,
-                       'LabelResponse': LabelResponse,
-                       'NumberResponse': NumberResponse})
+                       'endpoint_response_class': str(endpoint.response_type),
+                       'label_response_class': str(LabelResponse),
+                       'number_response_class': str(NumberResponse.code),
+                       'endpoint_url': get_endpoint_url(user, endpoint)})
