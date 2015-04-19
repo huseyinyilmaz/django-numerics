@@ -18,6 +18,7 @@ Dependencies
 - Django>=1.6.0 and above
 
 If Crypto serializer is used:
+
 - cryptography>=0.8.0
 
 
