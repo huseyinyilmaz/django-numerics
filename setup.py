@@ -57,7 +57,7 @@ setup(
     zip_safe=False,
     test_suite='setup.runtests',
     tests_require=[
-        'Django>=1.5.0',
+        'Django>=1.6.0',
         'cryptography>=0.8.0'
     ],
 )

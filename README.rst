@@ -14,11 +14,12 @@ Documentation, Usage examples
 Dependencies
 ============
 
-- python 3.4
-- Django 1.7
-- cryptography
+- python 2.7 and above including python 3.x
+- Django>=1.6.0 and above
 
-Current version works only for python 3. python 2 will be provided soon.
+If Crypto serializer is used:
+- cryptography>=0.8.0
+
 
 .. |build| image:: https://travis-ci.org/huseyinyilmaz/django-numerics.png
 .. _build: https://travis-ci.org/huseyinyilmaz/django-numerics
