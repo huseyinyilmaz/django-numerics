@@ -48,7 +48,7 @@ def get_serializer():
 
 def grant_access(user, endpoint):
     """Grant permission."""
-    return True
+    return not user.is_anonymous()
 
 
 def register(name, func, response_type, args=None, kwargs=None,

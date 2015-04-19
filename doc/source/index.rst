@@ -65,13 +65,21 @@ Than you can register some endpoints for your dashboard. For instance following 
 
 In this case, registered endpoint does not have user specific info. User specific info could be provided by using user argument of endpoint function.
 
-After this open http://localhost:8000/numerics to see list of endpoints for current user.
+After endpoint registration, open http://localhost:8000/numerics to see list of endpoints for current user. If there is no logged in user you will get a 404. This behivour can be changed by providing a new permission function to register function.
 
 
-Indices and tables
-==================
+Run tests
+---------
+ To run tests, first make sure that django is installed on current environment. Than run following command
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+ .. code-block:: bash
 
+   $ python setup.py test
+
+Build documentation
+-------------------
+
+.. code-block:: bash
+
+   $ pip install -r doc_requirements.txt
+   $ python setup.py build_sphinx
