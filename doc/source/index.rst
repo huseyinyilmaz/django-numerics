@@ -10,7 +10,10 @@ Give your app a mobile dashboard.
 
 django-numerics is a numerics dashboard endpoint provider for django.
 
-Contents:
+Note
+----
+
+This project is still under development give a month or so to get stable.
 
 Install django-numerics
 -----------------------
