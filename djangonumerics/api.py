@@ -84,12 +84,19 @@ def get_endpoint_url(user, endpoint):
     """Return url string for given user and endpoint."""
     serializer = get_serializer()
     data = serializer.serialize(user, endpoint)
-    return '{url}?endpoint={endpoint}'.format(
-        url=reverse('django-numerics-index'),
-        endpoint=urlquote(data))
+    return reverse('django-numerics-endpoint', kwargs={'code': urlquote(data)})
 
 
-def get_endpoint_urls(user):
+def get_endpoint_help_url(user, endpoint):
+    """Return help url string for given user and endpoint."""
+    serializer = get_serializer()
+    data = serializer.serialize(user, endpoint)
+    return reverse('django-numerics-help', kwargs={'code': urlquote(data)})
+
+
+def get_endpoints(user):
     """Return mapping of name->enpoints for given user."""
-    return {endpoint.name: get_endpoint_url(user, endpoint)
-            for endpoint in _CODE_ENDPOINT_MAP.values()}
+    return [{'name': endpoint.name,
+             'url': get_endpoint_url(user, endpoint),
+             'help_url': get_endpoint_help_url(user, endpoint)}
+            for endpoint in _CODE_ENDPOINT_MAP.values()]

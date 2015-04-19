@@ -45,14 +45,15 @@
             <tr>
               <th>EndPoint</th>
               <th>Url</th>
+              <th>Integration</th>
             </tr>
           </thead>
           <tbody>
-            {% for name,endpoint_url in endpoint_urls.items %}
+            {% for endpoint in endpoints %}
             <tr>
-              <th>{{name}}</th>
-              <td><a href="{{ request.scheme|safe }}://{{ request.get_host|safe }}{{ endpoint_url|safe }}">
-                {{ request.scheme|safe }}://{{ request.get_host|safe }}{{ endpoint_url|safe }}</a></td>
+              <th>{{ endpoint.name }}</th>
+              <td><a href="{{ request.scheme|safe }}://{{ request.get_host|safe }}{{ endpoint.url|safe }}">Click to open endpoint</a></td>
+              <td><a href="{{ request.scheme|safe }}://{{ request.get_host|safe }}{{ endpoint.help_url|safe }}">Integration help</a></td>
             </tr>
             {% endfor %}
           </tbody>
