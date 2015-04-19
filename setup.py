@@ -8,7 +8,7 @@ from setuptools import setup
 
 logging.basicConfig()
 
-VERSION = '0.1.1'
+VERSION = '0.1.2'
 DESCRIPTION = 'numerics dashboard endpoint provider for django.'
 
 
