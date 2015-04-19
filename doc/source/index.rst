@@ -6,11 +6,16 @@
 Welcome to django-numerics's documentation!
 ===========================================
 
+Give your app a mobile dashboard.
+
+django-numerics is a numerics dashboard endpoint provider for django.
+
 Contents:
 
 .. toctree::
    :maxdepth: 2
 
+   installation
 
 
 Indices and tables

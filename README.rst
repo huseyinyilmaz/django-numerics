@@ -7,9 +7,6 @@ django-numerics is a numerics dashboard endpoint provider for django.
 
 This is still under development.
 
-TODO
-====
-Documentation, Usage examples
 
 Dependencies
 ============
@@ -22,9 +19,9 @@ If Crypto serializer is used:
 - cryptography>=0.8.0
 
 
-For more examples please refere to documentation docs_
+For more information, please refer to documentation_
 
 .. |build| image:: https://travis-ci.org/huseyinyilmaz/django-numerics.png
 .. _build: https://travis-ci.org/huseyinyilmaz/django-numerics
 
-.. _docs: http://django-numerics.readthedocs.org/
+.. _documentation: http://django-numerics.readthedocs.org/
