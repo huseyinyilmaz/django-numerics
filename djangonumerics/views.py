@@ -10,7 +10,6 @@ from djangonumerics.api import get_serializer
 from djangonumerics.forms import EndPointForm
 from djangonumerics.exceptions import ResponseException
 from djangonumerics.serializers import SerializerException
-from djangonumerics.responses import BaseResponse
 from django.shortcuts import render
 from django.core.cache import cache
 logger = logging.getLogger()
@@ -57,12 +56,13 @@ class IndexView(View):
                     endpoint_response = endpoint.func(user,
                                                       *endpoint.args,
                                                       **endpoint.kwargs)
-                    if not isinstance(endpoint_response, BaseResponse):
+                    if not type(endpoint_response) == endpoint.response_type:
                         raise ResponseException(
-                            'Endpoint Response Must be one of the '
-                            'django numeric response types. {typ} found '
+                            'Endpoint Response Must be {expected_type}. '
+                            '{typ} found '
                             'instead. {val})'
-                            .format(typ=type(endpoint_response),
+                            .format(expected_type=endpoint.response_type,
+                                    typ=type(endpoint_response),
                                     val=endpoint_response))
                     response_body = json.dumps(endpoint_response.response())
                     if endpoint.cache_timeout:
@@ -70,6 +70,7 @@ class IndexView(View):
                                   response_body,
                                   endpoint.cache_timeout)
                 except ResponseException as e:
+                    logger.exception('Could not return a response')
                     response_body = json.dumps({'success': False,
                                                 'errors': e.args})
             response = HttpResponse(response_body,

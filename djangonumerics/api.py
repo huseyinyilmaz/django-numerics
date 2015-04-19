@@ -8,14 +8,15 @@ from django.core.urlresolvers import reverse
 from django.utils.http import urlquote
 from django.utils.module_loading import import_string
 
+from djangonumerics.responses import BaseResponse
 _CODE_ENDPOINT_MAP = {}
 _NAME_ENDPOINT_MAP = {}
 
 logger = logging.getLogger(__name__)
 
-EndPoint = namedtuple('EndPoint', ['name',
-                                   'code', 'cache_timeout', 'func',
-                                   'args', 'kwargs', 'permission_func'])
+EndPoint = namedtuple('EndPoint', ['name', 'code', 'cache_timeout', 'func',
+                                   'response_type', 'args', 'kwargs',
+                                   'permission_func'])
 
 # return an endpoint that is assign to given code.
 get_endpoint = _CODE_ENDPOINT_MAP.get
@@ -46,13 +47,18 @@ def grant_access(user, endpoint):
     return True
 
 
-def register(name, func, args=None, kwargs=None, cache_timeout=0,
-             permission_func=grant_access):
+def register(name, func, response_type, args=None, kwargs=None,
+             cache_timeout=0, permission_func=grant_access):
     """Register given name and function."""
+    if not issubclass(response_type, BaseResponse):
+        raise ValueError('Response type must be '
+                         'one of the subclasses of '
+                         'djangonumerics.responses.BaseResponse')
     if not args:
         args = []
     if not kwargs:
         kwargs = {}
+
     salt = settings.DJANGO_NUMERICS_SALT
     api_hash = hashlib.md5(str((name, salt)).encode()).hexdigest()
     endpoint = EndPoint(name=name,
@@ -60,6 +66,7 @@ def register(name, func, args=None, kwargs=None, cache_timeout=0,
                         func=func,
                         args=args,
                         kwargs=kwargs,
+                        response_type=response_type,
                         cache_timeout=cache_timeout,
                         permission_func=permission_func)
     if(api_hash in _CODE_ENDPOINT_MAP):
