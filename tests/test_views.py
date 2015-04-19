@@ -24,6 +24,7 @@ class EndpointViewTests(TestCase):
         url = reverse('django-numerics-index')
         User = get_user_model()
         User.objects.create_user('test', 'test@test.com', 'test')
+
         self.client.login(username='test', password='test')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
