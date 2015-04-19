@@ -10,6 +10,7 @@ language: python
 #   - cassandra
 python:
   - "3.4"
+  - "2.7"
 # cache:
 #   directories:
 #     - node_modules
@@ -17,7 +18,10 @@ python:
 #     - "$HOME/virtualenv/python2.7.9"
 env:
   matrix:
+    - DJANGO_VERSION=1.5.0
+    - DJANGO_VERSION=1.6.0
     - DJANGO_VERSION=1.7.7
+    - DJANGO_VERSION=1.8.0
   # matrix:
   #   -
     # - DB=sqlite
