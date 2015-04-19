@@ -28,5 +28,5 @@ class EndpointViewTests(TestCase):
         self.client.login(username='test', password='test')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-        endpoint_urls = response.context.get('endpoints')
+        endpoint_urls = response.context[0].get('endpoints')
         self.assertEqual(endpoint_urls, [])
