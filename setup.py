@@ -8,6 +8,9 @@ from setuptools import setup
 
 logging.basicConfig()
 
+VERSION = '0.1.1'
+DESCRIPTION = 'numerics dashboard endpoint provider for django.'
+
 
 def runtests():
     """Run django tests."""
@@ -50,8 +53,11 @@ def runtests():
 
 setup(
     name='django-numerics',
-    version='0.1.0',
+    version=VERSION,
+    description=DESCRIPTION,
+    url='https://github.com/huseyinyilmaz/django-numerics',
     author='Huseyin Yilmaz',
+    author_email='yilmazhuseyin@gmail.com',
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
