@@ -1,0 +1,16 @@
+{% extends "djangonumerics/base.html" %}
+{% block extra_head %}
+{% endblock %}
+
+{% block body %}
+-{{ NumberResponse.code }}-
+  <br>
+-{{ LabelResponse.code }}-
+  <br>
+  {% if endpoint.response_type.code == NumberResponse.code %}
+    HORRAY LABEL RESPONSE
+  {% endif %}
+  <br>
+  {{ endpoint }}
+
+{% endblock %}

@@ -15,6 +15,7 @@ class BaseResponse:
 
     """Base response object for numeric endpoint responses."""
 
+    code = 'base'
     form_class = None
 
     def set_data(self, data):
@@ -41,6 +42,7 @@ class LabelResponse(BaseResponse):
 
     """Response Object for Label From JSON Data widget."""
 
+    code = 'label'
     form_class = LabelResponseForm
 
     def __init__(self, value, postfix=''):
@@ -58,4 +60,5 @@ class NumberResponse(LabelResponse):
 
     """Response Object for Number from JSON data widget."""
 
+    code = 'number'
     form_class = NumberResponseForm

@@ -62,11 +62,7 @@ class BaseView(View):
 
 class EndpointView(BaseView):
 
-    """numeric source interface.
-
-    This interface lists all endpoints for current user.
-    If an enpoint parameter is provided, it provides that for given interface.
-    """
+    """numeric source interface."""
 
     form_class = EndPointForm
 
@@ -98,3 +94,20 @@ class EndpointView(BaseView):
 
         return HttpResponse(response_body,
                             content_type='application/json')
+
+
+class HelpView(BaseView):
+
+    """Endpoint for given help page."""
+
+    def process(self, code, user, endpoint):
+        """Return help page as httpresponse."""
+        view_name = getattr(settings,
+                            'DJANGO_NUMERICS_HELP_VIEW',
+                            'djangonumerics/help.html')
+        return render(self.request, view_name,
+                      {'code': code,
+                       'user': user,
+                       'endpoint': endpoint,
+                       'LabelResponse': LabelResponse,
+                       'NumberResponse': NumberResponse})
