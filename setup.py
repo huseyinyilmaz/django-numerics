@@ -32,7 +32,9 @@ def runtests():
         ROOT_URLCONF='djangonumerics.urls',
     )
 
-    django.setup()
+    if hasattr(django, 'setup'):
+        # django >= 1.7
+        django.setup()
     # This need to be imported after the settings has been configured
     try:
         from django.test.runner import DiscoverRunner
