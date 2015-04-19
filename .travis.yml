@@ -40,8 +40,11 @@ env:
 #   - "echo \"create keyspace sentry with replication = {'class' : 'SimpleStrategy', 'replication_factor': 1};\" | cqlsh --cqlversion=3.0.3"
 #  - echo 'create table nodestore (key text primary key, value blob, flags int);' | cqlsh -k sentry --cqlversion=3.0.3
 
-script:
+install:
   - pip install Django==$DJANGO_VERSION
   - pip install -r dev_requirements.txt
   - flake8 djangonumerics
+  - flake8 tests
+
+script:
   - python setup.py test

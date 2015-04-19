@@ -60,3 +60,6 @@ target/
 .\#*
 *~
 \#*\#
+
+# macosx
+.DS_Store
