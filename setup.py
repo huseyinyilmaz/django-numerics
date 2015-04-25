@@ -1,4 +1,10 @@
-"""setup for django-numerics."""
+"""setup for django-numerics.
+
+To update version:
+1) update the version in this file.
+2) update the version in documentation configuration.
+"""
+
 
 import logging
 import sys
@@ -8,7 +14,7 @@ from setuptools import setup
 
 logging.basicConfig()
 
-VERSION = '0.1.2'
+VERSION = '0.2.0'
 DESCRIPTION = 'numerics dashboard endpoint provider for django.'
 
 
