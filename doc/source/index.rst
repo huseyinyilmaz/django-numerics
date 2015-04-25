@@ -10,6 +10,42 @@ Give your app a mobile dashboard.
 
 django-numerics is a numerics dashboard endpoint provider for django.
 
+What is numerics
+----------------
+Numerics is a dashboard application for your mobile phone and tablet.
+http://cynapse.com/numerics/
+
+What is django-numerics
+-----------------------
+django-numerics is a django application that provides 2 things. An easy interface to create endpoints for custom json widgets for numeric dashboard. Provides a user interface that lists all the endpoints that current user have access.
+
+.. image:: _static/numerics_endpoints.jpg
+
+Interface also provides an integration guide that specialized for each endpoint.
+
+
+Why this is helpful
+-------------------
+Every project that has some data that can should be checked frequently. with numerics dashboard and django-numerics application it is very easy to have a very slick interface on your mobile phone for your project.
+
+1) Your project will have a dashboard on mobile devices
+
+.. image:: _static/phone_dashboard.jpg
+
+and tablets
+
+.. image:: _static/tablet_dashboard.jpg
+
+2) You can show your data on *today screen* of your mobile phone and tablet.
+
+.. image:: _static/today_screen.jpg
+
+3) You can receive notification when certain widget data is changed.
+
+.. image:: _static/notification.jpg
+
+4) If you have a apple watch you can show your data on your watch.
+
 Install django-numerics
 -----------------------
 django-numerics can be installed using pip.
