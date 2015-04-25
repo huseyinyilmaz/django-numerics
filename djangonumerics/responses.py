@@ -1,6 +1,10 @@
 """Response objects for endpoints.
 
 Endpoint objects must return one of those objects as responses.
+
+New repsonse types should make sure that they are not subclass of an existing
+response type. Otherwise response type check would fail for those specific
+cases.
 """
 import json
 
@@ -38,12 +42,12 @@ class BaseResponse:
                             content_type='application/json')
 
 
-class LabelResponse(BaseResponse):
+class BaseBasicResponse(BaseResponse):
 
     """Response Object for Label From JSON Data widget."""
 
-    code = 'label'
-    form_class = LabelResponseForm
+    code = 'basebasic'
+    form_class = None
 
     def __init__(self, value, postfix=''):
         """Initializer."""
@@ -54,6 +58,14 @@ class LabelResponse(BaseResponse):
         return {'postfix': self.data['postfix'],
                 'data': {
                     'value': self.data['value']}}
+
+
+class LabelResponse(BaseBasicResponse):
+
+    """Response Object for Label From JSON Data widget."""
+
+    code = 'label'
+    form_class = LabelResponseForm
 
 
 class NumberResponse(LabelResponse):

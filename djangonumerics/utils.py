@@ -1,4 +1,8 @@
 """Utility functions for django numerics."""
+
+from __future__ import unicode_literals  # noqa
+
+import six
 import json
 from django.core.exceptions import ImproperlyConfigured
 from django.conf import settings
@@ -6,7 +10,6 @@ from django.conf import settings
 from cryptography.fernet import Fernet
 import binascii
 
-_FERNET_ENCODING = 'ascii'
 _FERNET_KEY = 'fernet'
 
 _CACHE = {}
@@ -21,7 +24,7 @@ def get_fernet():
     """
     if _FERNET_KEY not in _CACHE:
         try:
-            key = bytes(settings.DJANGO_NUMERICS_SECRET_KEY, _FERNET_ENCODING)
+            key = six.b(settings.DJANGO_NUMERICS_SECRET_KEY)
             _CACHE[_FERNET_KEY] = Fernet(key)
         except binascii.Error:
             raise ImproperlyConfigured('DJANGO_NUMERICS_SECRET_KEY must be a '
@@ -38,7 +41,9 @@ def encrypt(data):
     into json. That way data can be any serialziable object.
     """
     data_json = json.dumps(data)
-    data_bytes = bytes(data_json, _FERNET_ENCODING)
+    if isinstance(data, six.text_type):
+        data = data.encode('utf-8')
+    data_bytes = six.b(data_json)
     return get_fernet().encrypt(data_bytes).decode('utf-8')
 
 
@@ -50,9 +55,9 @@ def decrypt(data):
     encrypted string is created. decrypt method will raise an exception.
     """
     # make sure that data is str or bytes string
-    if isinstance(data, str):
-        data = bytes(data, _FERNET_ENCODING)
-    elif isinstance(data, bytes):
+    if isinstance(data, six.text_type):
+        data = data.encode('utf-8')
+    elif isinstance(data, six.binary_type):
         # it is already in right format
         pass
     else:

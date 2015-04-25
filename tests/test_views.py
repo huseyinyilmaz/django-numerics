@@ -109,7 +109,7 @@ class EndpointViewTests(BaseTestCase):
         resp_json = json.loads(response.content.decode('utf-8'))
         expected_json = {'data': {'value': 'label_val'},
                          'postfix': 'postfix_label'}
-        self.assertDictEqual(resp_json, expected_json)
+        self.assertEqual(resp_json, expected_json)
 
     def test_registered_endpoints_with_wrong_return_type(self):
         """Test view context with one valid endpoint."""

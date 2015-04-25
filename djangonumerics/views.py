@@ -80,7 +80,7 @@ class EndpointView(BaseView):
                                                   *endpoint.args,
                                                   **endpoint.kwargs)
 
-                if not type(endpoint_response) == endpoint.response_type:
+                if not isinstance(endpoint_response, endpoint.response_type):
 
                     raise ResponseException(
                         'Endpoint Response Must be {expected_type}. '
