@@ -23,7 +23,7 @@ Or source code can be downloaded from github.
 
 Integration
 -----------
-To use django-numerics in a project first add it to INSTALLED_APPS in your django settings file.
+1) To use django-numerics in a project first add it to INSTALLED_APPS in your project's settings.py file.
 
 .. code-block:: python
 
@@ -36,18 +36,19 @@ To use django-numerics in a project first add it to INSTALLED_APPS in your djang
    )
 
 
-Add following setting to django settings file.
+2) Add following settings to your project's settings.py file.
 
 
 .. code-block:: python
 
-        # Please update those values for your project
-        # more info:
+        # for more info about django numeric settings:
         # http://django-numerics.readthedocs.org/en/latest/#django-numerics-settings
         DJANGO_NUMERICS_SALT='salt',
         DJANGO_NUMERICS_SECRET_KEY= '_i7QFz8nH19camV1PTono1ruXNtdOCPPQRZo22ckZXg=',
+        DJANGO_NUMERICS_SERIALIZER_BACKEND = \
+            'djangonumerics.serializers.CryptoSerializer'
 
-Go to main urls file and add django-numerics endpoints to url patterns
+3) Go to main urls file and add django-numerics endpoints to url patterns
 
 .. code-block:: python
 
@@ -60,7 +61,7 @@ Go to main urls file and add django-numerics endpoints to url patterns
        url(r'^numerics/', include(djangonumerics.urls)),
    )
 
-Than you can register some endpoints for your dashboard. For instance following code adds number of current users as an endpoint.
+4) Register some endpoints for your dashboard. For instance following code adds number of current users as an endpoint.
 
 .. code-block:: python
 
@@ -76,11 +77,50 @@ Than you can register some endpoints for your dashboard. For instance following 
 
 In this case, registered endpoint does not have user specific info. User specific info could be provided by using user argument of endpoint function.
 
-After endpoint registration, open http://localhost:8000/numerics to see list of endpoints for current user. If there is no logged in user you will get a 404. This behivour can be changed by providing a new permission function to register function.
+After endpoint registration, open http://localhost:8000/numerics to see list of endpoints for current user. You will also find instructions about how to integrate those endpoints on that page. When you open the url, make sure that you are logged in with a user. If there is no logged in user, you will get a 404. This behivour can be changed by providing a new permission function. See permission section for more information.
 
 django-numerics settings
 ========================
-TODO: add settings explanations.
+
+settings.DJANGO_NUMERICS_SALT (Mandatory)
+-----------------------------------------
+
+Salt is used in creating md5 of the endpoint names. It is also usefull to have project specific urls if you are using basic serializer.
+
+DJANGO_NUMERICS_SECRET_KEY (Mandatory for crypto serializer)
+------------------------------------------------------------
+
+Hexedecimal value that will be used by crypto serializer. To generate a unique value. remove this setting and run the project. Generated error log will have uniquely generated SECRET_KEY. Soy you should be seeing following log message:
+
+ .. code-block:: text
+
+   django.core.exceptions.ImproperlyConfigured: DJANGO_NUMERICS_SECRET_KEY must be a hexedecimal value. Here is one that is randomly generated for you ;) b'WZOjKcUw8mgnsMHHHklZX8azsDqvS5gY3PdNk6FIPIU='
+
+Now you can add that uniquely generated SECRET_KEY in settings
+
+
+ .. code-block:: text
+
+   DJANGO_NUMERICS_SECRET_KEY = 'WZOjKcUw8mgnsMHHHklZX8azsDqvS5gY3PdNk6FIPIU='
+
+DJANGO_NUMERICS_SERIALIZER_BACKEND
+----------------------------------
+
+Changes how djangonumeric endpoint urls are generated. Please see *serializers* section of documentation for choices.
+
+DJANGO_NUMERICS_VIEW
+--------------------
+
+djangonumerics comes with a default interface. But you can change the default interface to fit your projects, design. default value is *djangonumerics/index.html*
+
+DJANGO_NUMERICS_HELP_VIEW
+-------------------------
+
+djangonumerics comes with numerics dashboard installation instruction for every endpoint. With this setting, template that creates help pages can be changed. default value is *djangonumerics/help.html*
+
+DJANGO_NUMERICS_ENABLED
+-----------------------
+With this settings, all djangonumerics endpoints can be disabled. Default value is True
 
 
 Run tests

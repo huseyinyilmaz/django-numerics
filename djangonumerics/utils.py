@@ -24,7 +24,11 @@ def get_fernet():
     """
     if _FERNET_KEY not in _CACHE:
         try:
-            key = six.b(settings.DJANGO_NUMERICS_SECRET_KEY)
+            key = six.b(getattr(settings, 'DJANGO_NUMERICS_SECRET_KEY', ''))
+            if not key:
+                # same error if key is not hexedecimal.
+                # that way 2 errors will be handled in same place.
+                raise binascii.Error
             _CACHE[_FERNET_KEY] = Fernet(key)
         except binascii.Error:
             raise ImproperlyConfigured('DJANGO_NUMERICS_SECRET_KEY must be a '
