@@ -82,7 +82,7 @@ After endpoint registration, open http://localhost:8000/numerics to see list of 
 django-numerics settings
 ========================
 
-settings.DJANGO_NUMERICS_SALT (Mandatory)
+DJANGO_NUMERICS_SALT (Mandatory)
 -----------------------------------------
 
 Salt is used in creating md5 of the endpoint names. It is also usefull to have project specific urls if you are using basic serializer.
@@ -90,7 +90,7 @@ Salt is used in creating md5 of the endpoint names. It is also usefull to have p
 DJANGO_NUMERICS_SECRET_KEY (Mandatory for crypto serializer)
 ------------------------------------------------------------
 
-Hexedecimal value that will be used by crypto serializer. To generate a unique value. remove this setting and run the project. Generated error log will have uniquely generated SECRET_KEY. Soy you should be seeing following log message:
+Hexedecimal value that will be used by crypto serializer. To generate a unique value. remove this setting and run the project. Generated error log will have uniquely generated SECRET_KEY. You should be seeing following log message. Notice the unique key value at the end of log message:
 
  .. code-block:: text
 
