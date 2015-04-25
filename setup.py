@@ -3,6 +3,8 @@
 To update version:
 1) update the version in this file.
 2) update the version in documentation configuration.
+3) Goto readthedocs.com and make release doc public.
+4) push a new release to pypi.
 """
 
 
