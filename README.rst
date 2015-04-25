@@ -1,8 +1,6 @@
 django-numerics |build|_
 ===============================
 
-NOTE: This project is still under development.
-
 Give your app a mobile dashboard.
 
 django-numerics is a numerics dashboard endpoint provider for django.

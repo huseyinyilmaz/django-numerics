@@ -1,8 +1,10 @@
 """Utility functions for django numerics."""
 import json
+from django.core.exceptions import ImproperlyConfigured
 from django.conf import settings
 
 from cryptography.fernet import Fernet
+import binascii
 
 _FERNET_ENCODING = 'ascii'
 _FERNET_KEY = 'fernet'
@@ -18,9 +20,14 @@ def get_fernet():
 
     """
     if _FERNET_KEY not in _CACHE:
-        key = bytes(settings.DJANGO_NUMERICS_SECRET_KEY, _FERNET_ENCODING)
-        _CACHE[_FERNET_KEY] = Fernet(key)
-
+        try:
+            key = bytes(settings.DJANGO_NUMERICS_SECRET_KEY, _FERNET_ENCODING)
+            _CACHE[_FERNET_KEY] = Fernet(key)
+        except binascii.Error:
+            raise ImproperlyConfigured('DJANGO_NUMERICS_SECRET_KEY must be a '
+                                       'hexedecimal value. Here is one that '
+                                       'is randomly generated for you ;) '
+                                       '{}'.format(Fernet.generate_key()))
     return _CACHE[_FERNET_KEY]
 
 

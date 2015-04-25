@@ -14,7 +14,7 @@ class LabelResponseForm(forms.Form):
     """Validation Form for LabelResponse."""
 
     value = forms.CharField()
-    postfix = forms.CharField()
+    postfix = forms.CharField(required=False)
 
 
 class NumberResponseForm(forms.Form):
@@ -22,7 +22,7 @@ class NumberResponseForm(forms.Form):
     """Validation Form for NumberResponse."""
 
     value = forms.FloatField()
-    postfix = forms.CharField()
+    postfix = forms.CharField(required=False)
 
     def clean_value(self):
         """If value is an integer convert it to an integer field."""

@@ -26,6 +26,8 @@ class IndexView(View):
     def get(self, request):
         """get method."""
         endpoints = get_endpoints(request.user)
+        if not endpoints:
+            raise Http404('No endpoints available')
         view_name = getattr(settings,
                             'DJANGO_NUMERICS_VIEW',
                             'djangonumerics/index.html')
@@ -55,6 +57,8 @@ class BaseView(View):
             user, endpoint = serializer.deserialize(code)
             self.user = user
             self.endpoint = endpoint
+            if not endpoint.permission_func(user, endpoint):
+                raise Http404()
         except SerializerException:
             logger.exception('Cannot deserialize')
             raise Http404()
@@ -75,7 +79,9 @@ class EndpointView(BaseView):
                 endpoint_response = endpoint.func(user,
                                                   *endpoint.args,
                                                   **endpoint.kwargs)
+
                 if not type(endpoint_response) == endpoint.response_type:
+
                     raise ResponseException(
                         'Endpoint Response Must be {expected_type}. '
                         '{typ} found '

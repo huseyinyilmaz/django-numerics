@@ -47,7 +47,7 @@ def get_serializer():
 
 
 def grant_access(user, endpoint):
-    """Grant permission."""
+    """default permission function for endpoints."""
     return not user.is_anonymous()
 
 
@@ -99,4 +99,5 @@ def get_endpoints(user):
     return [{'name': endpoint.name,
              'url': get_endpoint_url(user, endpoint),
              'help_url': get_endpoint_help_url(user, endpoint)}
-            for endpoint in _CODE_ENDPOINT_MAP.values()]
+            for endpoint in _CODE_ENDPOINT_MAP.values()
+            if endpoint.permission_func(user, endpoint)]

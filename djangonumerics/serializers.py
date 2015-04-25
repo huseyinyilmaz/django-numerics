@@ -99,7 +99,6 @@ class CryptoSerializer:
         User = get_user_model()
         try:
             user = User.objects.get(pk=user_pk)
-
         except User.DoesNotExist:
             raise SerializerException('User does not exist')
         endpoint = get_endpoint(endpoint_code)

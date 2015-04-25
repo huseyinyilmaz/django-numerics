@@ -24,16 +24,23 @@ def runtests():
             },
         },
         INSTALLED_APPS=(
-            'django.contrib.contenttypes',
             'django.contrib.auth',
+            'django.contrib.contenttypes',
+            'django.contrib.sessions',
+            'django.contrib.messages',
             'djangonumerics',
         ),
         MIDDLEWARE_CLASSES=(
             'django.contrib.sessions.middleware.SessionMiddleware',
+            'django.middleware.common.CommonMiddleware',
             'django.contrib.auth.middleware.AuthenticationMiddleware',
             'django.contrib.messages.middleware.MessageMiddleware',
         ),
         ROOT_URLCONF='djangonumerics.urls',
+
+        DJANGO_NUMERICS_SALT='salt',
+        DJANGO_NUMERICS_SECRET_KEY=
+        '_i7QFz8nH19camV1PPono1ruZNtdOCPPQRZo22ckZXg=',
     )
 
     if hasattr(django, 'setup'):
