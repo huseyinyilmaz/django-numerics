@@ -17,16 +17,15 @@ http://cynapse.com/numerics/
 
 What is django-numerics
 -----------------------
-django-numerics is a django application that provides 2 things. An easy interface to create endpoints for custom json widgets for numeric dashboard. Provides a user interface that lists all the endpoints that current user have access.
+django-numerics is a django application that provides 2 things. An easy interface to create endpoints for numerics custom json widgets. Provides a user interface that lists all the endpoints that current user have access to.
 
 .. image:: _static/numerics_endpoints.jpg
 
 Interface also provides an integration guide that specialized for each endpoint.
 
-
 Why this is helpful
 -------------------
-Every project that has some data that can should be checked frequently. with numerics dashboard and django-numerics application it is very easy to have a very slick interface on your mobile phone for your project.
+Every project has some data that needs to be checked daily. But opening some web page to check the status is not a really nice interface. With numerics dashboard and django-numerics, it is very easy to have a very slick status dashboard on your mobile phone. Your data will be available whenever you want, where ever you want. Here is what you will get with almost no efford.
 
 1) Your project will have a dashboard on mobile devices
 
@@ -36,7 +35,7 @@ and tablets
 
 .. image:: _static/tablet_dashboard.jpg
 
-2) You can show your data on *today screen* of your mobile phone and tablet.
+2) You can show your data on *today screen* of your mobile phone and tablet. At last, today screen will have data that you actually care.
 
 .. image:: _static/today_screen.jpg
 
@@ -44,7 +43,7 @@ and tablets
 
 .. image:: _static/notification.jpg
 
-4) If you have a apple watch you can show your data on your watch.
+4) If you have an apple watch you can show your data on your watch.
 
 Install django-numerics
 -----------------------
@@ -97,23 +96,24 @@ Integration
        url(r'^numerics/', include(djangonumerics.urls)),
    )
 
-4) Register some endpoints for your dashboard. For instance following code adds number of current users as an endpoint.
+4) Register some endpoints for your dashboard. For instance following code adds number of users as an endpoint.
 
 .. code-block:: python
 
     from djangonumerics import NumberResponse
     from djangonumerics import register
+
+
     def total_users(user):
         """Return total number of users."""
         user_count = User.objects.filter(is_active=True).count()
         return NumberResponse(user_count, 'Total number of users')
 
+
     # register endpoint to django-numerics
     register('total-users', total_users, NumberResponse)
 
-In this case, registered endpoint does not have user specific info. User specific info could be provided by using user argument of endpoint function.
-
-After endpoint registration, open http://localhost:8000/numerics to see list of endpoints for current user. You will also find instructions about how to integrate those endpoints on that page. When you open the url, make sure that you are logged in with a user. If there is no logged in user, you will get a 404. This behivour can be changed by providing a new permission function. See permission section for more information.
+After endpoint registration, open http://localhost:8000/numerics to see list of endpoints for current user. You will also find instructions about how to integrate those endpoints. When you open the url, make sure that you are logged in with a user. If there is no logged in user, you will get a 404. This behavior can be changed by providing a new permission function. See permission section for more information.
 
 django-numerics settings
 ========================
@@ -121,12 +121,12 @@ django-numerics settings
 DJANGO_NUMERICS_SALT (Mandatory)
 -----------------------------------------
 
-Salt is used in creating md5 of the endpoint names. It is also usefull to have project specific urls if you are using basic serializer.
+Salt is used in creating md5 of the endpoint names. It is also usefull to have project specific urls, if you are using basic serializer.
 
 DJANGO_NUMERICS_SECRET_KEY (Mandatory for crypto serializer)
 ------------------------------------------------------------
 
-Hexedecimal value that will be used by crypto serializer. To generate a unique value. remove this setting and run the project. Generated error log will have uniquely generated SECRET_KEY. You should be seeing following log message. Notice the unique key value at the end of log message:
+Hexedecimal value that will be used by crypto serializer. To generate a unique value. remove this setting and run the project. Generated error log will have uniquely generated SECRET_KEY. You should be seeing following log message. Notice the unique key at the end of log message:
 
  .. code-block:: text
 
@@ -142,17 +142,17 @@ Now you can add that uniquely generated SECRET_KEY in settings
 DJANGO_NUMERICS_SERIALIZER_BACKEND
 ----------------------------------
 
-Changes how djangonumeric endpoint urls are generated. Please see *serializers* section of documentation for choices.
+Changes how djangonumeric endpoint urls are generated. Please see *serializers* section of documentation for options.
 
 DJANGO_NUMERICS_VIEW
 --------------------
 
-djangonumerics comes with a default interface. But you can change the default interface to fit your projects, design. default value is *djangonumerics/index.html*
+djangonumerics comes with a default interface. But you can change the default interface to fit your project's design by changing the template of the view. default value is *djangonumerics/index.html*
 
 DJANGO_NUMERICS_HELP_VIEW
 -------------------------
 
-djangonumerics comes with numerics dashboard installation instruction for every endpoint. With this setting, template that creates help pages can be changed. default value is *djangonumerics/help.html*
+djangonumerics comes with numerics dashboard integration instructions for every endpoint. With this setting, template that creates help pages can be changed. default value is *djangonumerics/help.html*
 
 DJANGO_NUMERICS_ENABLED
 -----------------------
@@ -180,7 +180,7 @@ Usage
 
 Registration
 ------------
-In order to add a new widget to your numerics dashboard, first you need to register an endpoint on your application. registration of an endpoint is a very simple process. just call djangonumerics.api.register with andpoint information. Here is signiture of register function.
+In order to add a new widget to your numerics dashboard, first you need to register an endpoint on your application. registration of an endpoint is a very simple process. just call djangonumerics.register with andpoint information. Here is signiture of register function.
 
 .. code-block:: python
 
@@ -191,13 +191,13 @@ In order to add a new widget to your numerics dashboard, first you need to regis
 Here is the explanation of all arguments.
 
 1) **name**: name of the endpoint. This will be used as an identifier for you endpoint. Make sure that it is unique. If you try to register multiple endpoints with the same name latter ones will be ignored.
-2) **func, args, kwargs**: Those should be your endpoint function and its arguments. Your endpoint function will be called as following.
+2) **func, args, kwargs**: Your endpoint function and its arguments. Your endpoint function will be called as following.
 
 .. code-block:: python
 
    endpoint_response = func(user, *args, **kwargs)
 
-So normally your endpoint function will be a normal function that takes a django user as an argument and returns a response objects that is instance of one of widget responses from djangonumerics.responses. But you can provide extra arguments from args and kwargs variables.
+So your endpoint function will be a normal function that takes a django user as an argument and returns a response object that is instance of one of widget responses from djangonumerics.responses. But you can provide extra arguments with args and kwargs variables.
 
 3) **response_type**: This is a response type of endpoint function. Every endpoint will be formated for certain widget. So response type of the endpoints should stay same at all times. This value should be one of the response classes in djangonumerics.responses module. Chose the response type for widget that you will use this endpoint with.
 4) **cache_timeout**: Normally endpoint function will be called for every request. But you can cache the endpoint response for any period of time. By default caching is disabled.
