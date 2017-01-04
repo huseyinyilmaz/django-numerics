@@ -6,7 +6,6 @@ from tests.base import BaseTestCase
 
 
 class LabelResponseTestCase(BaseTestCase):
-
     """Tests for LabelResponse."""
 
     def test_valid_data(self):
@@ -35,7 +34,6 @@ class LabelResponseTestCase(BaseTestCase):
 
 
 class NumberResponseTestCase(BaseTestCase):
-
     """Tests for NumberResponse."""
 
     def test_valid_data(self):

@@ -8,20 +8,18 @@ from djangonumerics import api
 
 
 class BaseAPITestCase(BaseTestCase):
-
     """Base endpoint for base api test case."""
 
     def always_true(self, user, endpoint):
-        """permission function that always grants."""
+        """Permission function that always grants."""
         return True
 
     def always_false(self, user, endpoint):
-        """permission function that always refuses."""
+        """Permission function that always refuses."""
         return False
 
 
 class RegisterTests(BaseAPITestCase):
-
     """Tests for register."""
 
     def test_valid_endpoint(self):
@@ -75,7 +73,6 @@ class RegisterTests(BaseAPITestCase):
 
 
 class GetEndPointsTests(BaseAPITestCase):
-
     """Tests for djangonumerics.api.get_endpoints."""
 
     def test_two_granted_endpoints(self):

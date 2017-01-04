@@ -7,7 +7,6 @@ from tests.base import BaseTestCase
 
 
 class BaseSerializerTestCase(BaseTestCase):
-
     """Base Test case for all serialziers.
 
     This class also tests Debug serializer class.
@@ -51,14 +50,12 @@ class BaseSerializerTestCase(BaseTestCase):
 
 
 class BasicSerializerTestCase(BaseSerializerTestCase):
-
     """Tests for basic serializer."""
 
     serializer_class = serializers.BasicSerializer
 
 
 class CryptoSerializerTestCase(BaseSerializerTestCase):
-
     """Tests for basic serializer."""
 
     serializer_class = serializers.CryptoSerializer

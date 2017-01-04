@@ -14,7 +14,6 @@ from tests.base import BaseTestCase
 
 
 class IndexViewTests(BaseTestCase):
-
     """Test endpoint for views."""
 
     def setUp(self):
@@ -84,7 +83,6 @@ class IndexViewTests(BaseTestCase):
 
 
 class EndpointViewTests(BaseTestCase):
-
     """Test for endpoint view."""
 
     def setUp(self):

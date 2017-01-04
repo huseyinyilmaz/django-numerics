@@ -8,7 +8,6 @@ from djangonumerics import responses
 
 
 class BaseTestCase(TestCase):
-
     """Base test class for view tests."""
 
     USERNAME = 'username'
@@ -36,11 +35,11 @@ class BaseTestCase(TestCase):
         self._empty_dict(api._CACHE)
 
     def label_endpoint(self, user):
-        """mock label endpoint."""
+        """Mock label endpoint."""
         return responses.LabelResponse('label_val', 'postfix_label')
 
     def number_endpoint(self, user):
-        """mock number endpoint."""
+        """Mock number endpoint."""
         return responses.NumberResponse(3, 'postfix_number')
 
     def create_user(self):
