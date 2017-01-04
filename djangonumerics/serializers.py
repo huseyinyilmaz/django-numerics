@@ -15,12 +15,10 @@ from cryptography.fernet import InvalidToken
 
 
 class SerializerException(Exception):
-
     """Raised if Serializer cannot deserialize given string."""
 
 
 class DebugSerializer:
-
     """Debug serializer.
 
     This is default serializer. Serialized urls will be human readable.
@@ -56,13 +54,12 @@ class DebugSerializer:
 
 
 class BasicSerializer:
-
     """Basic serializer."""
 
     SEPARATOR = '/'
 
     def serialize(self, user, endpoint):
-        """serialize to user_pk|endpointcode."""
+        """Serialize to user_pk|endpointcode."""
         return '{user_pk}{seperator}{endpoint_code}'.format(
             user_pk=user.pk,
             seperator=self.SEPARATOR,
@@ -83,7 +80,6 @@ class BasicSerializer:
 
 
 class CryptoSerializer:
-
     """Serialize with cryptography."""
 
     def serialize(self, user, endpoint):

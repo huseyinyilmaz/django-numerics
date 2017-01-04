@@ -20,11 +20,10 @@ logger = logging.getLogger()
 
 
 class IndexView(View):
-
     """List endpoints view."""
 
     def get(self, request):
-        """get method."""
+        """Get method."""
         endpoints = get_endpoints(request.user)
         if not endpoints:
             raise Http404('No endpoints available')
@@ -38,14 +37,13 @@ class IndexView(View):
 
 
 class BaseView(View):
-
     """View for numeric endpoints.
 
     If an endpoint is provided
     """
 
     def get(self, request, code):
-        """get handler."""
+        """Get handler."""
         enabled = getattr(settings,
                           'DJANGO_NUMERICS_ENABLED',
                           True)
@@ -66,7 +64,6 @@ class BaseView(View):
 
 
 class EndpointView(BaseView):
-
     """numeric source interface."""
 
     form_class = EndPointForm
@@ -104,7 +101,6 @@ class EndpointView(BaseView):
 
 
 class HelpView(BaseView):
-
     """Endpoint for given help page."""
 
     def process(self, code, user, endpoint):

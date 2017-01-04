@@ -3,14 +3,12 @@ from django import forms
 
 
 class EndPointForm(forms.Form):
-
     """Form that will used to validate endpoint view arguments."""
 
     endpoint = forms.CharField()
 
 
 class LabelResponseForm(forms.Form):
-
     """Validation Form for LabelResponse."""
 
     value = forms.CharField()
@@ -18,7 +16,6 @@ class LabelResponseForm(forms.Form):
 
 
 class NumberResponseForm(forms.Form):
-
     """Validation Form for NumberResponse."""
 
     value = forms.FloatField()

@@ -16,7 +16,6 @@ from djangonumerics.forms import NumberResponseForm
 
 
 class BaseResponse:
-
     """Base response object for numeric endpoint responses."""
 
     code = 'base'
@@ -43,7 +42,6 @@ class BaseResponse:
 
 
 class BaseBasicResponse(BaseResponse):
-
     """Response Object for Label From JSON Data widget."""
 
     code = 'basebasic'
@@ -61,7 +59,6 @@ class BaseBasicResponse(BaseResponse):
 
 
 class LabelResponse(BaseBasicResponse):
-
     """Response Object for Label From JSON Data widget."""
 
     code = 'label'
@@ -69,7 +66,6 @@ class LabelResponse(BaseBasicResponse):
 
 
 class NumberResponse(LabelResponse):
-
     """Response Object for Number from JSON data widget."""
 
     code = 'number'

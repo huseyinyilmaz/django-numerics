@@ -2,5 +2,4 @@
 
 
 class ResponseException(Exception):
-
     """Exception type that Response objects raise."""
