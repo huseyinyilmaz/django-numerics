@@ -44,13 +44,28 @@ def runtests():
             'django.contrib.auth.middleware.AuthenticationMiddleware',
             'django.contrib.messages.middleware.MessageMiddleware',
         ),
+        TEMPLATES=[
+            {
+                'BACKEND': 'django.template.backends.django.DjangoTemplates',
+                'DIRS': [],
+                'APP_DIRS': True,
+                'OPTIONS': {
+                    'context_processors': [
+                        'django.template.context_processors.debug',
+                        'django.template.context_processors.request',
+                        'django.contrib.auth.context_processors.auth',
+                        'django.contrib.messages.context_processors.messages',
+                    ],
+                },
+            },
+        ],
+
         ROOT_URLCONF='djangonumerics.urls',
 
         DJANGO_NUMERICS_SALT='salt',
         DJANGO_NUMERICS_SECRET_KEY=
         '_i7QFz8nH19camV1PPono1ruZNtdOCPPQRZo22ckZXg=',
     )
-
     if hasattr(django, 'setup'):
         # django >= 1.7
         django.setup()

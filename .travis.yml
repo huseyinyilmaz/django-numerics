@@ -9,6 +9,8 @@ language: python
 #   - redis-server
 #   - cassandra
 python:
+  - "3.6"
+  - "3.5"
   - "3.4"
   - "3.3"
   - "3.2"
@@ -25,6 +27,7 @@ env:
     - DJANGO_VERSION=1.6.0
     - DJANGO_VERSION=1.7.7
     - DJANGO_VERSION=1.8.0
+    - DJANGO_VERSION=1.9.0
   # matrix:
   #   -
     # - DB=sqlite
