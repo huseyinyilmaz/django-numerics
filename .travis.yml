@@ -27,7 +27,7 @@ env:
     - DJANGO_VERSION=1.6.0
     - DJANGO_VERSION=1.7.7
     - DJANGO_VERSION=1.8.0
-    - DJANGO_VERSION=1.9.0
+    - DJANGO_VERSION=1.9.12
   # matrix:
   #   -
     # - DB=sqlite
